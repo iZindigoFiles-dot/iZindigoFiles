@@ -87,6 +87,15 @@
             color: var(--text-muted);
             font-size: 0.9rem;
         }
+        .warning-box {
+            background-color: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid var(--danger);
+            padding: 10px 12px;
+            border-radius: 4px;
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: #fca5a5;
+        }
         pre {
             background-color: var(--code-bg);
             padding: 15px;
@@ -157,6 +166,9 @@
             <pre><code id="codeCheck">ls /*/lib*/*angle*</code></pre>
             <div class="btn-group">
                 <button onclick="copyCode('codeCheck', this)">📋 Copy Check Command</button>
+            </div>
+            <div class="warning-box">
+                ⚠️ <strong>Paalala:</strong> Kapag ang lumabas na error ay <em>"No such file or directory"</em>, ibig sabihin ay walang ANGLE graphics libraries ang device mo at <strong>hindi gagana</strong> sa'yo ang mga ANGLE/Pixelated scripts.
             </div>
         </div>
 
