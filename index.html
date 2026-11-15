@@ -168,7 +168,7 @@
                 <button onclick="copyCode('codeCheck', this)">📋 Copy Check Command</button>
             </div>
             <div class="warning-box">
-                ⚠️ <strong>Paalala:</strong> Kapag ang lumabas na error ay <em>"No such file or directory"</em>, ibig sabihin ay walang ANGLE graphics libraries ang device mo at <strong>hindi gagana</strong> sa'yo ang mga ANGLE scripts.
+                ⚠️ <strong>Paalala:</strong> Kapag ang lumabas na error ay <em>"No such file or directory"</em>, ibig sabihin ay walang ANGLE graphics libraries ang device mo at <strong>hindi gagana</strong> sa'yo ang mga ANGLE/Pixelated scripts.
             </div>
         </div>
 
@@ -216,7 +216,29 @@
             </div>
         </div>
 
-        <!-- Card 4: MORE PERFORMANCE -->
+        <!-- Card 4: MORE PIXELATED -->
+        <div class="card">
+            <h3>🎮 MORE PIXELATED (Max FPS / Low Texture LOD) <span class="badge">NO ROOT</span></h3>
+            <p>I-force ang ANGLE driver sa lahat ng installed apps at babaan ang texture LOD para sa ultra-smooth frame rates.</p>
+            <pre><code id="codePixelated">for a in $(cmd package query-activities --user 0 -a android.intent.action.MAIN -c android.intent.category.LAUNCHER|awk -F= '/geNa/{z=$2}/ry=0/{print z}');do b=$b,$a c=$c,angle;done;cmd settings put global angle_gl_driver_selection_pkgs android$b;cmd settings put global angle_gl_driver_selection_values native$c;setprop debug.angle.feature_overrides_enabled allow*:cache*:enable*:ensure*:expose*:generate*:multiview*:prefer*:forceTextureLodOffset4</code></pre>
+            
+            <div class="btn-group">
+                <button onclick="copyCode('codePixelated', this)">📋 Copy Code</button>
+                <button onclick="downloadCode('codePixelated', 'more_pixelated_angle.txt', 'dlPixelated')">📥 Download .txt</button>
+            </div>
+
+            <h4>🗑️ Uninstall / Reset More Pixelated:</h4>
+            <pre class="uninstall-code"><code id="uninstallPixelated">cmd settings delete global angle_gl_driver_selection_pkgs;cmd settings delete global angle_gl_driver_selection_values</code></pre>
+            <div class="btn-group">
+                <button class="btn-uninstall" onclick="copyCode('uninstallPixelated', this)">📋 Copy Uninstall</button>
+            </div>
+
+            <div class="stats">
+                <span>📥 Script Downloads: <span id="dlPixelated">0</span></span>
+            </div>
+        </div>
+
+        <!-- Card 5: MORE PERFORMANCE -->
         <div class="card">
             <h3>🚀 MORE PERFORMANCE (Global ANGLE) <span class="badge">NO ROOT</span></h3>
             <p>I-enable ang global ANGLE rendering driver para sa mas mabilis at stable na GPU performance.</p>
@@ -235,6 +257,59 @@
 
             <div class="stats">
                 <span>📥 Script Downloads: <span id="dlPerf">0</span></span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global View Counter gamit ang CountAPI
+        fetch('https://api.countapi.xyz/hit/izindigofiles/visits')
+            .then(res => res.json())
+            .then(res => { document.getElementById('viewCount').innerText = res.value; })
+            .catch(() => { document.getElementById('viewCount').innerText = "600+"; });
+
+        // Copy Function
+        function copyCode(elementId, btn) {
+            const text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = btn.innerText;
+                btn.innerText = '✅ Copied!';
+                setTimeout(() => { btn.innerText = originalText; }, 2000);
+            });
+        }
+
+        // Download Function + Counter Update
+        function downloadCode(elementId, filename, counterId) {
+            const text = document.getElementById(elementId).innerText;
+            const blob = new Blob([text], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+            URL.revokeObjectURL(url);
+
+            // Update counter sa API at screen
+            fetch(`https://api.countapi.xyz/hit/izindigofiles/${counterId}`)
+                .then(res => res.json())
+                .then(res => { document.getElementById(counterId).innerText = res.value; })
+                .catch(() => {
+                    let el = document.getElementById(counterId);
+                    el.innerText = (parseInt(el.innerText) || 0) + 1;
+                });
+        }
+
+        // I-load ang kasalukuyang download counts pagbukas ng site
+        ['dlSafeAngle', 'dlFps', 'dlPixelated', 'dlPerf'].forEach(id => {
+            fetch(`https://api.countapi.xyz/get/izindigofiles/${id}`)
+                .then(res => res.json())
+                .then(res => { if(res.value) document.getElementById(id).innerText = res.value; })
+                .catch(() => {});
+        });
+    </script>
+</body>
+</html>
+></span>
             </div>
         </div>
     </div>
