@@ -3,26 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iZindigoFiles | No-Root ANGLE & 120 FPS Boost Hub</title>
+    <title>iZindigoFiles | Pro Optimization & FPS Hub</title>
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
+            --bg-color: #090d16;
+            --card-bg: #131d31;
+            --card-border: #1e293b;
             --accent: #38bdf8;
             --accent-hover: #0ea5e9;
-            --danger: #ef4444;
-            --danger-hover: #dc2626;
-            --badge-bg: #059669;
+            --danger: #f43f5e;
+            --danger-hover: #e11d48;
+            --success: #10b981;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --code-bg: #090d16;
+            --code-bg: #05080f;
+        }
+        * {
+            box-sizing: border-box;
         }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
             margin: 0;
-            padding: 20px;
+            padding: 15px;
             display: flex;
             justify-content: center;
         }
@@ -32,105 +36,136 @@
         }
         header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
+            padding: 20px 10px;
+            background: linear-gradient(135deg, #131d31 0%, #1e293b 100%);
+            border-radius: 16px;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
         }
         header h1 {
             color: var(--accent);
-            margin-bottom: 5px;
-            font-size: 2rem;
+            margin: 0 0 8px 0;
+            font-size: 1.8rem;
+            letter-spacing: 0.5px;
         }
         header p {
             color: var(--text-muted);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            margin: 0 0 15px 0;
         }
         .global-stats {
-            display: inline-block;
-            background-color: var(--card-bg);
-            padding: 8px 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background-color: rgba(56, 189, 248, 0.1);
+            padding: 6px 14px;
             border-radius: 20px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--accent);
-            border: 1px solid #334155;
-            margin-top: 10px;
-            font-weight: bold;
-        }
-        .badge {
-            display: inline-block;
-            background-color: var(--badge-bg);
-            color: #fff;
-            font-size: 0.75rem;
-            font-weight: bold;
-            padding: 3px 8px;
-            border-radius: 4px;
-            vertical-align: middle;
-            margin-left: 8px;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            font-weight: 600;
         }
         .card {
             background-color: var(--card-bg);
-            border-radius: 12px;
+            border-radius: 14px;
             padding: 20px;
             margin-bottom: 20px;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-            border: 1px solid #334155;
+            border: 1px solid var(--card-border);
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+        .card:hover {
+            border-color: rgba(56, 189, 248, 0.4);
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 8px;
         }
         .card h3 {
-            margin-top: 0;
+            margin: 0;
             color: var(--text-main);
-            font-size: 1.25rem;
+            font-size: 1.15rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        .card h4 {
-            margin: 15px 0 5px 0;
-            color: #fca5a5;
-            font-size: 0.95rem;
+        .badge {
+            background-color: var(--success);
+            color: #fff;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 6px;
+            letter-spacing: 0.5px;
         }
         .card p {
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            margin: 0 0 12px 0;
+            line-height: 1.4;
         }
         .warning-box {
-            background-color: rgba(239, 68, 68, 0.1);
-            border-left: 4px solid var(--danger);
+            background-color: rgba(244, 63, 94, 0.1);
+            border-left: 3px solid var(--danger);
             padding: 10px 12px;
-            border-radius: 4px;
-            margin-top: 12px;
-            font-size: 0.85rem;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            font-size: 0.82rem;
             color: #fca5a5;
+            line-height: 1.4;
         }
         pre {
             background-color: var(--code-bg);
-            padding: 15px;
+            padding: 12px;
             border-radius: 8px;
             overflow-x: auto;
             color: #38bdf8;
             font-family: 'Courier New', Courier, monospace;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             border: 1px solid #1e293b;
             white-space: pre-wrap;
             word-break: break-all;
+            margin: 0 0 12px 0;
         }
         pre.uninstall-code {
             color: #fca5a5;
-            border-color: #450a0a;
+            border-color: rgba(244, 63, 94, 0.2);
+            background-color: rgba(244, 63, 94, 0.03);
+        }
+        .sub-heading {
+            margin: 12px 0 6px 0;
+            color: #fca5a5;
+            font-size: 0.85rem;
+            font-weight: 600;
         }
         .btn-group {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 12px;
+            gap: 8px;
+            margin-bottom: 12px;
         }
         button {
             background-color: var(--accent);
-            color: #0f172a;
+            color: #090d16;
             border: none;
-            padding: 9px 14px;
+            padding: 8px 12px;
             border-radius: 6px;
             cursor: pointer;
-            font-weight: bold;
-            font-size: 0.85rem;
-            transition: background-color 0.2s;
+            font-weight: 700;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
         }
         button:hover {
             background-color: var(--accent-hover);
+            transform: translateY(-1px);
         }
         button.btn-uninstall {
             background-color: var(--danger);
@@ -139,14 +174,23 @@
         button.btn-uninstall:hover {
             background-color: var(--danger-hover);
         }
-        .stats {
-            font-size: 0.85rem;
+        .stats-bar {
+            font-size: 0.78rem;
             color: var(--text-muted);
-            margin-top: 15px;
             display: flex;
+            flex-wrap: wrap;
             gap: 15px;
-            border-top: 1px solid #334155;
+            border-top: 1px solid var(--card-border);
             padding-top: 10px;
+            margin-top: 5px;
+        }
+        .stats-bar span {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .stats-bar strong {
+            color: var(--text-main);
         }
     </style>
 </head>
@@ -155,210 +199,217 @@
     <div class="container">
         <header>
             <h1>⚡ iZindigoFiles Hub</h1>
-            <p>No-Root ANGLE Graphics Driver & 120 FPS Boost Commands (Brevent / LADB / Shizuku)</p>
+            <p>No-Root ANGLE Graphics Driver & Performance Optimization Scripts</p>
             <div class="global-stats">👀 Total Site Views: <span id="viewCount">Loading...</span></div>
         </header>
 
         <!-- Card 1: Check ANGLE Support -->
         <div class="card">
-            <h3>🔍 Check ANGLE Support <span class="badge">NO ROOT</span></h3>
+            <div class="card-header">
+                <h3>🔍 Check ANGLE Support <span class="badge">NO ROOT</span></h3>
+            </div>
             <p>I-run muna ito sa Brevent o LADB para ma-check kung supported ng device mo ang ANGLE graphics libraries.</p>
             <pre><code id="codeCheck">ls /*/lib*/*angle*</code></pre>
             <div class="btn-group">
-                <button onclick="copyCode('codeCheck', this)">📋 Copy Check Command</button>
+                <button onclick="trackAction('Check', 'copy', 'cntCheckCopy')">📋 Copy Command (<span id="cntCheckCopy">0</span>)</button>
             </div>
             <div class="warning-box">
-                ⚠️ <strong>Paalala:</strong> Kapag ang lumabas na error ay <em>"No such file or directory"</em>, ibig sabihin ay walang ANGLE graphics libraries ang device mo at <strong>hindi gagana</strong> sa'yo ang mga ANGLE/Pixelated scripts.
+                ⚠️ <strong>Paalala:</strong> Kapag lumabas ang error na <em>"No such file or directory"</em>, ibig sabihin ay walang ANGLE libraries ang device mo at hindi gagana ang mga scripts.
+            </div>
+            <div class="stats-bar">
+                <span>👁️ Views: <strong id="cntCheckView">0</strong></span>
+                <span>📋 Copies: <strong id="cntCheckCopyStats">0</strong></span>
             </div>
         </div>
 
-        <!-- Card 2: SAFE ANGLE OPTIMIZER (NO GLITCH / FIX AUTO-CLOSE) -->
+        <!-- Card 2: PIXELATED BLOCKY WITH FIX AUTO CLOSE -->
         <div class="card">
-            <h3>🛡️ SAFE ANGLE OPTIMIZER (Fix Glitch & Auto-Close) <span class="badge">NO ROOT</span></h3>
-            <p>I-apply ang ANGLE driver nang ligtas sa mga piling laro (CODM, ML, Roblox) nang walang system glitches o sudden background closing.</p>
-            <pre><code id="codeSafeAngle">GAME_LIST="com.garena.game.codm,com.mobile.legends,com.roblox.client"; for a in $(echo $GAME_LIST | tr ',' '\n'); do pm list packages | grep -q "$a" && { cmd settings put global angle_gl_driver_selection_pkgs $a; cmd settings put global angle_gl_driver_selection_values angle; echo "Optimized: $a"; }; done</code></pre>
+            <div class="card-header">
+                <h3>🧱 Pixelated Blocky (Fix Auto Close) <span class="badge">CODM SPECIFIC</span></h3>
+            </div>
+            <p>Para sa CODM: I-force ang ANGLE gamit ang nearest filtering at LOD offset para sa ultra-smooth blocky performance nang walang sudden auto-close glitch.</p>
+            <pre><code id="codePixelated">settings put global angle_gl_driver_selection_pkgs com.garena.game.codm && settings put global angle_gl_driver_selection_values angle && setprop debug.angle.feature_overrides_enabled forceNearestFiltering:disableAnisotropicFiltering:forceTextureLodOffset4 && am force-stop com.garena.game.codm</code></pre>
             
             <div class="btn-group">
-                <button onclick="copyCode('codeSafeAngle', this)">📋 Copy Code</button>
-                <button onclick="downloadCode('codeSafeAngle', 'safe_angle_optimizer.txt', 'dlSafeAngle')">📥 Download .txt</button>
+                <button onclick="trackAction('Pixelated', 'copy', 'cntPixelatedCopy')">📋 Copy Code (<span id="cntPixelatedCopy">0</span>)</button>
+                <button onclick="trackAction('Pixelated', 'download', 'cntPixelatedDl', 'pixelated_fix_autoclose.txt', 'codePixelated')">📥 Download .txt (<span id="cntPixelatedDl">0</span>)</button>
             </div>
 
-            <h4>🗑️ Uninstall / Reset Safe Angle:</h4>
-            <pre class="uninstall-code"><code id="uninstallSafe">for a in com.garena.game.codm com.mobile.legends com.roblox.client; do cmd settings delete global angle_gl_driver_selection_pkgs; cmd settings delete global angle_gl_driver_selection_values; done</code></pre>
+            <div class="sub-heading">🗑️ Uninstall / Reset Script:</div>
+            <pre class="uninstall-code"><code id="uninstallPixelated">settings delete global angle_gl_driver_selection_values && settings delete global angle_gl_driver_selection_pkgs && setprop debug.angle.feature_overrides_enabled "" && am force-stop com.garena.game.codm</code></pre>
             <div class="btn-group">
-                <button class="btn-uninstall" onclick="copyCode('uninstallSafe', this)">📋 Copy Uninstall</button>
+                <button class="btn-uninstall" onclick="trackAction('PixelatedUninstall', 'copy', 'cntPixelatedUnCopy')">📋 Copy Uninstall (<span id="cntPixelatedUnCopy">0</span>)</button>
             </div>
 
-            <div class="stats">
-                <span>📥 Script Downloads: <span id="dlSafeAngle">0</span></span>
+            <div class="stats-bar">
+                <span>👁️ Views: <strong id="cntPixelatedView">0</strong></span>
+                <span>📋 Copies: <strong id="cntPixelatedCopyStats">0</strong></span>
+                <span>📥 Downloads: <strong id="cntPixelatedDlStats">0</strong></span>
             </div>
         </div>
 
-        <!-- Card 3: DEVICE CONFIG 120 FPS BOOST -->
+        <!-- Card 3: MORE PIXELATED (GLOBAL / LAUNCHER APPS) -->
         <div class="card">
-            <h3>🔥 DEVICE CONFIG FPS BOOST (120 FPS Unlock) <span class="badge">NO ROOT</span></h3>
+            <div class="card-header">
+                <h3>🎮 More Pixelated (Max FPS / Low Texture LOD) <span class="badge">NO ROOT</span></h3>
+            </div>
+            <p>I-force ang ANGLE driver sa lahat ng installed launcher apps at babaan ang texture LOD para sa pangkalahatang ultra-smooth frame rates.</p>
+            <pre><code id="codeMorePixel">for a in $(cmd package query-activities --user 0 -a android.intent.action.MAIN -c android.intent.category.LAUNCHER|awk -F= '/geNa/{z=$2}/ry=0/{print z}');do b=$b,$a c=$c,angle;done;cmd settings put global angle_gl_driver_selection_pkgs android$b;cmd settings put global angle_gl_driver_selection_values native$c;setprop debug.angle.feature_overrides_enabled allow*:cache*:enable*:ensure*:expose*:generate*:multiview*:prefer*:forceTextureLodOffset4</code></pre>
+            
+            <div class="btn-group">
+                <button onclick="trackAction('MorePixel', 'copy', 'cntMorePixelCopy')">📋 Copy Code (<span id="cntMorePixelCopy">0</span>)</button>
+                <button onclick="trackAction('MorePixel', 'download', 'cntMorePixelDl', 'more_pixelated_angle.txt', 'codeMorePixel')">📥 Download .txt (<span id="cntMorePixelDl">0</span>)</button>
+            </div>
+
+            <div class="sub-heading">🗑️ Uninstall / Reset More Pixelated:</div>
+            <pre class="uninstall-code"><code id="uninstallMorePixel">cmd settings delete global angle_gl_driver_selection_pkgs; cmd settings delete global angle_gl_driver_selection_values; setprop debug.angle.feature_overrides_enabled ""</code></pre>
+            <div class="btn-group">
+                <button class="btn-uninstall" onclick="trackAction('MorePixelUninstall', 'copy', 'cntMorePixelUnCopy')">📋 Copy Uninstall (<span id="cntMorePixelUnCopy">0</span>)</button>
+            </div>
+
+            <div class="stats-bar">
+                <span>👁️ Views: <strong id="cntMorePixelView">0</strong></span>
+                <span>📋 Copies: <strong id="cntMorePixelCopyStats">0</strong></span>
+                <span>📥 Downloads: <strong id="cntMorePixelDlStats">0</strong></span>
+            </div>
+        </div>
+
+        <!-- Card 4: MORE PERFORMANCE -->
+        <div class="card">
+            <div class="card-header">
+                <h3>🚀 More Performance (Global ANGLE) <span class="badge">NO ROOT</span></h3>
+            </div>
+            <p>I-enable ang global ANGLE rendering driver para sa mas mabilis at stable na pangkalahatang GPU performance.</p>
+            <pre><code id="codePerf">cmd settings put global angle_gl_driver_all_angle 1; setprop debug.angle.feature_overrides_enabled allow*:cache*:enable*:ensure*:expose*:generate*:multiview*:prefer*:forceTextureLodOffset4</code></pre>
+            
+            <div class="btn-group">
+                <button onclick="trackAction('Perf', 'copy', 'cntPerfCopy')">📋 Copy Code (<span id="cntPerfCopy">0</span>)</button>
+                <button onclick="trackAction('Perf', 'download', 'cntPerfDl', 'more_performance_angle.txt', 'codePerf')">📥 Download .txt (<span id="cntPerfDl">0</span>)</button>
+            </div>
+
+            <div class="sub-heading">🗑️ Uninstall / Reset Performance:</div>
+            <pre class="uninstall-code"><code id="uninstallPerf">cmd settings delete global angle_gl_driver_all_angle; setprop debug.angle.feature_overrides_enabled ""</code></pre>
+            <div class="btn-group">
+                <button class="btn-uninstall" onclick="trackAction('PerfUninstall', 'copy', 'cntPerfUnCopy')">📋 Copy Uninstall (<span id="cntPerfUnCopy">0</span>)</button>
+            </div>
+
+            <div class="stats-bar">
+                <span>👁️ Views: <strong id="cntPerfView">0</strong></span>
+                <span>📋 Copies: <strong id="cntPerfCopyStats">0</strong></span>
+                <span>📥 Downloads: <strong id="cntPerfDlStats">0</strong></span>
+            </div>
+        </div>
+
+        <!-- Card 5: DEVICE CONFIG 120 FPS BOOST (INILIPAT SA BABA) -->
+        <div class="card">
+            <div class="card-header">
+                <h3>🔥 Device Config 120 FPS Boost <span class="badge">NO ROOT</span></h3>
+            </div>
             <p>I-unlock ang 120 FPS game overlay mode para sa CODM (Garena), Mobile Legends, at Roblox.</p>
-            <pre><code id="codeFps">GAME_LIST="com.garena.game.codm,com.mobile.legends,com.roblox.client";for a in $(echo $GAME_LIST | tr ',' '\n'); do pm list packages | grep -q "$a" && { old="$(cmd device_config get game_overlay $a 2>/dev/null | grep fps | cut -d= -f2 2>/dev/null)"; [ -z "$old" ]&&old="default";cmd device_config put game_overlay $a mode=2,fps=120 2>/dev/null; echo "$a: $old=120"; }; done</code></pre>
+            <pre><code id="codeFps">GAME_LIST="com.garena.game.codm,com.mobile.legends,com.roblox.client"; for a in $(echo $GAME_LIST | tr ',' '\n'); do pm list packages | grep -q "$a" && { old="$(cmd device_config get game_overlay $a 2>/dev/null | grep fps | cut -d= -f2 2>/dev/null)"; [ -z "$old" ]&&old="default"; cmd device_config put game_overlay $a mode=2,fps=120 2>/dev/null; echo "$a: $old=120"; }; done</code></pre>
             
             <div class="btn-group">
-                <button onclick="copyCode('codeFps', this)">📋 Copy Code</button>
-                <button onclick="downloadCode('codeFps', 'device_config_120fps.txt', 'dlFps')">📥 Download .txt</button>
+                <button onclick="trackAction('Fps', 'copy', 'cntFpsCopy')">📋 Copy Code (<span id="cntFpsCopy">0</span>)</button>
+                <button onclick="trackAction('Fps', 'download', 'cntFpsDl', 'device_config_120fps.txt', 'codeFps')">📥 Download .txt (<span id="cntFpsDl">0</span>)</button>
             </div>
 
-            <h4>🗑️ Uninstall / Reset FPS Boost:</h4>
+            <div class="sub-heading">🗑️ Uninstall / Reset FPS Boost:</div>
             <pre class="uninstall-code"><code id="uninstallFps">for a in com.garena.game.codm com.mobile.legends com.roblox.client; do cmd device_config delete game_overlay $a; done</code></pre>
             <div class="btn-group">
-                <button class="btn-uninstall" onclick="copyCode('uninstallFps', this)">📋 Copy Uninstall</button>
+                <button class="btn-uninstall" onclick="trackAction('FpsUninstall', 'copy', 'cntFpsUnCopy')">📋 Copy Uninstall (<span id="cntFpsUnCopy">0</span>)</button>
             </div>
 
-            <div class="stats">
-                <span>📥 Script Downloads: <span id="dlFps">0</span></span>
-            </div>
-        </div>
-
-        <!-- Card 4: MORE PIXELATED -->
-        <div class="card">
-            <h3>🎮 MORE PIXELATED (Max FPS / Low Texture LOD) <span class="badge">NO ROOT</span></h3>
-            <p>I-force ang ANGLE driver sa lahat ng installed apps at babaan ang texture LOD para sa ultra-smooth frame rates.</p>
-            <pre><code id="codePixelated">for a in $(cmd package query-activities --user 0 -a android.intent.action.MAIN -c android.intent.category.LAUNCHER|awk -F= '/geNa/{z=$2}/ry=0/{print z}');do b=$b,$a c=$c,angle;done;cmd settings put global angle_gl_driver_selection_pkgs android$b;cmd settings put global angle_gl_driver_selection_values native$c;setprop debug.angle.feature_overrides_enabled allow*:cache*:enable*:ensure*:expose*:generate*:multiview*:prefer*:forceTextureLodOffset4</code></pre>
-            
-            <div class="btn-group">
-                <button onclick="copyCode('codePixelated', this)">📋 Copy Code</button>
-                <button onclick="downloadCode('codePixelated', 'more_pixelated_angle.txt', 'dlPixelated')">📥 Download .txt</button>
-            </div>
-
-            <h4>🗑️ Uninstall / Reset More Pixelated:</h4>
-            <pre class="uninstall-code"><code id="uninstallPixelated">cmd settings delete global angle_gl_driver_selection_pkgs;cmd settings delete global angle_gl_driver_selection_values</code></pre>
-            <div class="btn-group">
-                <button class="btn-uninstall" onclick="copyCode('uninstallPixelated', this)">📋 Copy Uninstall</button>
-            </div>
-
-            <div class="stats">
-                <span>📥 Script Downloads: <span id="dlPixelated">0</span></span>
-            </div>
-        </div>
-
-        <!-- Card 5: MORE PERFORMANCE -->
-        <div class="card">
-            <h3>🚀 MORE PERFORMANCE (Global ANGLE) <span class="badge">NO ROOT</span></h3>
-            <p>I-enable ang global ANGLE rendering driver para sa mas mabilis at stable na GPU performance.</p>
-            <pre><code id="codePerf">cmd settings put global angle_gl_driver_all_angle 1;setprop debug.angle.feature_overrides_enabled allow*:cache*:enable*:ensure*:expose*:generate*:multiview*:prefer*:forceTextureLodOffset4</code></pre>
-            
-            <div class="btn-group">
-                <button onclick="copyCode('codePerf', this)">📋 Copy Code</button>
-                <button onclick="downloadCode('codePerf', 'more_performance_angle.txt', 'dlPerf')">📥 Download .txt</button>
-            </div>
-
-            <h4>🗑️ Uninstall / Reset More Performance:</h4>
-            <pre class="uninstall-code"><code id="uninstallPerf">cmd settings delete global angle_gl_driver_all_angle;setprop debug.angle.feature_overrides_enabled ""</code></pre>
-            <div class="btn-group">
-                <button class="btn-uninstall" onclick="copyCode('uninstallPerf', this)">📋 Copy Uninstall</button>
-            </div>
-
-            <div class="stats">
-                <span>📥 Script Downloads: <span id="dlPerf">0</span></span>
+            <div class="stats-bar">
+                <span>👁️ Views: <strong id="cntFpsView">0</strong></span>
+                <span>📋 Copies: <strong id="cntFpsCopyStats">0</strong></span>
+                <span>📥 Downloads: <strong id="cntFpsDlStats">0</strong></span>
             </div>
         </div>
     </div>
 
     <script>
-        // Global View Counter gamit ang CountAPI
+        // Global View Counter
         fetch('https://api.countapi.xyz/hit/izindigofiles/visits')
             .then(res => res.json())
             .then(res => { document.getElementById('viewCount').innerText = res.value; })
             .catch(() => { document.getElementById('viewCount').innerText = "600+"; });
 
-        // Copy Function
-        function copyCode(elementId, btn) {
-            const text = document.getElementById(elementId).innerText;
-            navigator.clipboard.writeText(text).then(() => {
-                const originalText = btn.innerText;
-                btn.innerText = '✅ Copied!';
-                setTimeout(() => { btn.innerText = originalText; }, 2000);
-            });
+        // Listahan ng mga individual counter IDs
+        const counters = [
+            'cntCheckView', 'cntCheckCopy', 'cntCheckCopyStats',
+            'cntPixelatedView', 'cntPixelatedCopy', 'cntPixelatedCopyStats', 'cntPixelatedDl', 'cntPixelatedDlStats', 'cntPixelatedUnCopy',
+            'cntMorePixelView', 'cntMorePixelCopy', 'cntMorePixelCopyStats', 'cntMorePixelDl', 'cntMorePixelDlStats', 'cntMorePixelUnCopy',
+            'cntPerfView', 'cntPerfCopy', 'cntPerfCopyStats', 'cntPerfDl', 'cntPerfDlStats', 'cntPerfUnCopy',
+            'cntFpsView', 'cntFpsCopy', 'cntFpsCopyStats', 'cntFpsDl', 'cntFpsDlStats', 'cntFpsUnCopy'
+        ];
+
+        // I-load lahat ng counts pagbukas ng site
+        counters.forEach(id => {
+            fetch(`https://api.countapi.xyz/get/izindigofiles/${id}`)
+                .then(res => res.json())
+                .then(res => { if(res.value !== undefined) document.getElementById(id).innerText = res.value; })
+                .catch(() => {});
+        });
+
+        // Trigger view counts para sa bawat card pagka-load ng page
+        ['Check', 'Pixelated', 'MorePixel', 'Perf', 'Fps'].forEach(card => {
+            fetch(`https://api.countapi.xyz/hit/izindigofiles/cnt${card}View`)
+                .then(res => res.json())
+                .then(res => { 
+                    document.getElementById(`cnt${card}View`).innerText = res.value; 
+                }).catch(() => {});
+        });
+
+        // Function para sa Copy, Download, at pag-update ng counters sa bawat pindot
+        function trackAction(cardName, actionType, counterId, filename = '', elementId = '') {
+            if (actionType === 'copy') {
+                let codeToCopy = '';
+                if (cardName === 'Check') codeToCopy = document.getElementById('codeCheck').innerText;
+                else if (cardName === 'Pixelated') codeToCopy = document.getElementById('codePixelated').innerText;
+                else if (cardName === 'PixelatedUninstall') codeToCopy = document.getElementById('uninstallPixelated').innerText;
+                else if (cardName === 'MorePixel') codeToCopy = document.getElementById('codeMorePixel').innerText;
+                else if (cardName === 'MorePixelUninstall') codeToCopy = document.getElementById('uninstallMorePixel').innerText;
+                else if (cardName === 'Perf') codeToCopy = document.getElementById('codePerf').innerText;
+                else if (cardName === 'PerfUninstall') codeToCopy = document.getElementById('uninstallPerf').innerText;
+                else if (cardName === 'Fps') codeToCopy = document.getElementById('codeFps').innerText;
+                else if (cardName === 'FpsUninstall') codeToCopy = document.getElementById('uninstallFps').innerText;
+
+                navigator.clipboard.writeText(codeToCopy).then(() => {
+                    hitCounter(counterId);
+                    if(document.getElementById(counterId + 'Stats')) {
+                        hitCounter(counterId + 'Stats');
+                    } else if(document.getElementById(counterId.replace('Copy', 'CopyStats'))) {
+                        hitCounter(counterId.replace('Copy', 'CopyStats'));
+                    }
+                    
+                    event.target.innerText = '✅ Copied!';
+                    setTimeout(() => { location.reload(); }, 1000);
+                });
+            } else if (actionType === 'download') {
+                const text = document.getElementById(elementId).innerText;
+                const blob = new Blob([text], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                a.click();
+                URL.revokeObjectURL(url);
+
+                hitCounter(counterId);
+                hitCounter(counterId + 'Stats');
+                setTimeout(() => { location.reload(); }, 1000);
+            }
         }
 
-        // Download Function + Counter Update
-        function downloadCode(elementId, filename, counterId) {
-            const text = document.getElementById(elementId).innerText;
-            const blob = new Blob([text], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = filename;
-            a.click();
-            URL.revokeObjectURL(url);
-
-            // Update counter sa API at screen
-            fetch(`https://api.countapi.xyz/hit/izindigofiles/${counterId}`)
+        function hitCounter(id) {
+            fetch(`https://api.countapi.xyz/hit/izindigofiles/${id}`)
                 .then(res => res.json())
-                .then(res => { document.getElementById(counterId).innerText = res.value; })
+                .then(res => { document.getElementById(id).innerText = res.value; })
                 .catch(() => {
-                    let el = document.getElementById(counterId);
+                    let el = document.getElementById(id);
                     el.innerText = (parseInt(el.innerText) || 0) + 1;
                 });
         }
-
-        // I-load ang kasalukuyang download counts pagbukas ng site
-        ['dlSafeAngle', 'dlFps', 'dlPixelated', 'dlPerf'].forEach(id => {
-            fetch(`https://api.countapi.xyz/get/izindigofiles/${id}`)
-                .then(res => res.json())
-                .then(res => { if(res.value) document.getElementById(id).innerText = res.value; })
-                .catch(() => {});
-        });
-    </script>
-</body>
-</html>
-></span>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Global View Counter gamit ang CountAPI
-        fetch('https://api.countapi.xyz/hit/izindigofiles/visits')
-            .then(res => res.json())
-            .then(res => { document.getElementById('viewCount').innerText = res.value; })
-            .catch(() => { document.getElementById('viewCount').innerText = "600+"; });
-
-        // Copy Function
-        function copyCode(elementId, btn) {
-            const text = document.getElementById(elementId).innerText;
-            navigator.clipboard.writeText(text).then(() => {
-                const originalText = btn.innerText;
-                btn.innerText = '✅ Copied!';
-                setTimeout(() => { btn.innerText = originalText; }, 2000);
-            });
-        }
-
-        // Download Function + Counter Update
-        function downloadCode(elementId, filename, counterId) {
-            const text = document.getElementById(elementId).innerText;
-            const blob = new Blob([text], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = filename;
-            a.click();
-            URL.revokeObjectURL(url);
-
-            // Update counter sa API at screen
-            fetch(`https://api.countapi.xyz/hit/izindigofiles/${counterId}`)
-                .then(res => res.json())
-                .then(res => { document.getElementById(counterId).innerText = res.value; })
-                .catch(() => {
-                    let el = document.getElementById(counterId);
-                    el.innerText = (parseInt(el.innerText) || 0) + 1;
-                });
-        }
-
-        // I-load ang kasalukuyang download counts pagbukas ng site
-        ['dlSafeAngle', 'dlFps', 'dlPerf'].forEach(id => {
-            fetch(`https://api.countapi.xyz/get/izindigofiles/${id}`)
-                .then(res => res.json())
-                .then(res => { if(res.value) document.getElementById(id).innerText = res.value; })
-                .catch(() => {});
-        });
     </script>
 </body>
 </html>
